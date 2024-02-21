@@ -5,3 +5,8 @@ environments:
 - name: dev
 - name: staging
 - name: prod
+plugins:
+  loaders:
+  - name: target-azureblobstorage
+    variant: shrutikaponde-vc
+    pip_url: git+https://github.com/shrutikaponde-vc/target-azureblobstorage.git
