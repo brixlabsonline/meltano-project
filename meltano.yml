@@ -6,7 +6,24 @@ environments:
 - name: staging
 - name: prod
 plugins:
+  extractors:
+  - name: tap-smoke-test
+    variant: meltano
+    pip_url: git+https://github.com/meltano/tap-smoke-test.git
+    config:
+      streams:
+      - stream_name: animals
+        input_filename: https://raw.githubusercontent.com/meltano/tap-smoke-test/main/demo-data/animals-data.jsonl
   loaders:
-  - name: target-azureblobstorage
-    variant: shrutikaponde-vc
-    pip_url: git+https://github.com/shrutikaponde-vc/target-azureblobstorage.git
+  - name: target-snowflake
+    variant: meltanolabs
+    pip_url: meltanolabs-target-snowflake
+    config:
+      account: ztmnwfq-kg00060
+      add_record_metadata: true
+      database: MELTANO_DATABASE
+      user: MELTANO_USER
+      role: MELTANO_ROLE
+      warehouse: MELTANO_WAREHOUSE
+      default_target_schema: ${MELTANO_EXTRACT__LOAD_SCHEMA}
+
